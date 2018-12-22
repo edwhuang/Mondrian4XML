@@ -1,0 +1,260 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Schema name='CDNANS' metamodelVersion='4.0'>
+  <PhysicalSchema>
+    <Table name='ANS_CDN_DAILY_REPORT' />
+    <Table name='ANS_CDN_HOUR_REPORT' />
+    <Table name='CALENDER'>
+      <Key>
+        <Column name='P_DATE_S'/>
+      </Key>
+    </Table>
+    <Table name='CONTENT_META' schema='IPTV'>
+      <Key>
+        <Column name='PROGRAM_ID' />
+      </Key>
+    </Table>
+    <Table name='ANS_CDN_SERVICE_NAME' Key='SERVICE_NAME'/>
+    <InlineTable alias='CDN_PROVIDER'>
+      <ColumnDefs>
+        <ColumnDef name='PROVIDER' type='String' />
+      </ColumnDefs>
+      <Rows>
+        <Row>
+          <Value column='PROVIDER'>HINET</Value>
+        </Row>
+        <Row>
+          <Value column='PROVIDER'>AWS</Value>
+        </Row>
+        <Row>
+          <Value column='PROVIDER'>AKA</Value>
+        </Row>
+      </Rows>
+    </InlineTable>
+    <InlineTable alias='P_Hour'>
+      <ColumnDefs>
+        <ColumnDef name='P_HOUR' type='Numeric' />
+      </ColumnDefs>
+      <Rows>
+        <Row>
+          <Value column='P_HOUR'>0</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>1</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>2</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>3</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>4</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>5</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>6</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>7</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>8</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>9</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>10</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>11</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>12</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>13</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>14</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>15</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>16</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>17</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>18</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>19</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>20</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>21</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>22</Value>
+        </Row>
+        <Row>
+          <Value column='P_HOUR'>23</Value>
+        </Row>
+      </Rows>
+    </InlineTable>
+  </PhysicalSchema>
+  <Dimension name='CDN廠商' table='CDN_PROVIDER' key='CDN廠商'>
+    <Attributes>
+      <Attribute name='CDN廠商' caption=''  keyColumn='PROVIDER' hasHierarchy='false' description='' />
+    </Attributes>
+    <Hierarchies>
+      <Hierarchy name='CDN廠商' caption='' allMemberName='所有'>
+        <Level attribute='CDN廠商' />
+      </Hierarchy>
+    </Hierarchies>
+  </Dimension>
+  <Dimension name='CDN服務' table='ANS_CDN_SERVICE_NAME' key='CDN服務名稱'>
+    <Attributes>
+      <Attribute name='服務種類' caption=''  keyColumn='SERVICE_TYPE' hasHierarchy='false' description='' />
+      <Attribute name='Platform' caption=''  keyColumn='PLATFORM' hasHierarchy='false' description='' />
+      <Attribute name='計費' caption=''  keyColumn='CAL_TYPE' hasHierarchy='false' description='' />
+      <Attribute name='CDN服務名稱' caption=''  keyColumn='SERVICE_NAME' hasHierarchy='false' description='' />
+    </Attributes>
+    <Hierarchies>
+      <Hierarchy name='服務種類' caption='' allMemberName='所有'>
+        <Level attribute='服務種類' />
+      </Hierarchy>
+      <Hierarchy name='Platform' caption='' allMemberName='所有'>
+        <Level attribute='Platform' />
+      </Hierarchy>
+      <Hierarchy name='計費' caption='' allMemberName='所有'>
+        <Level attribute='計費' />
+      </Hierarchy>
+      <Hierarchy name='CDN服務名稱' caption='' allMemberName='所有'>
+        <Level attribute='CDN服務名稱' />
+      </Hierarchy>
+    </Hierarchies>
+  </Dimension>
+  <Dimension name='時間' table='CALENDER' key='日期'>
+    <Attributes>
+      <Attribute name='年' caption=''  keyColumn='P_YEAR' hasHierarchy='false' description='' />
+      <Attribute name='月' caption=''  keyColumn='P_MONTH' hasHierarchy='false' description='' />
+      <Attribute name='日' caption=''  keyColumn='P_DAY' hasHierarchy='false' description='' />
+      <Attribute name='年月' caption=''  keyColumn='P_YYYYMM' hasHierarchy='false' description='' />
+      <Attribute name='星期' caption=''  keyColumn='P_WEEK' hasHierarchy='false' description='' />
+      <Attribute name='日期' caption=''  keyColumn='P_DATE_S' hasHierarchy='false' description='' />
+    </Attributes>
+    <Hierarchies>
+      <Hierarchy name='年月日' caption='' allMemberName='所有日期'>
+        <Level attribute='年' />
+        <Level attribute='月' />
+        <Level attribute='日' />
+      </Hierarchy>
+      <Hierarchy name='日期' caption='' allMemberName='所有日期'>
+        <Level attribute='日期' />
+      </Hierarchy>
+      <Hierarchy name='月份' caption='' allMemberName='月份'>
+        <Level attribute='年月' />
+      </Hierarchy>
+      <Hierarchy name='星期' caption='' allMemberName='所有星期'>
+        <Level attribute='星期' />
+      </Hierarchy>
+    </Hierarchies>
+  </Dimension>
+  <Dimension name='影片' table='CONTENT_META' key='Program ID'>
+    <Attributes>
+      <Attribute name='影片種類' caption=''  keyColumn='CONTENT_TYPE' hasHierarchy='false' description='' />
+      <Attribute name='影片名稱' caption=''  keyColumn='CONTENT_TITLE' hasHierarchy='false' description='' />
+      <Attribute name='集' caption=''  keyColumn='EPISODE_NO' hasHierarchy='false' description='' />
+
+      <Attribute name='Program ID' caption=''  keyColumn='PROGRAM_ID' hasHierarchy='false' description='' />
+    </Attributes>
+    <Hierarchies>
+      <Hierarchy name='影片' caption='' allMemberName='所有影片'>
+        <Level attribute='影片種類' />
+        <Level attribute='影片名稱' />
+        <Level attribute='集' />
+        <Level attribute='Program ID' />
+      </Hierarchy>
+      <Hierarchy name='集分類' caption='' allMemberName='所有集數'>
+        <Level attribute='集' />
+      </Hierarchy>
+    </Hierarchies>
+  </Dimension>
+  <Dimension name='時段' table='P_Hour' key='時段'>
+    <Attributes>
+      <Attribute name='時段' caption=''  keyColumn='P_HOUR' hasHierarchy='false' description='' />
+    </Attributes>
+    <Hierarchies>
+      <Hierarchy name='時段' caption='' allMemberName='所有'>
+        <Level attribute='時段' />
+      </Hierarchy>
+    </Hierarchies>
+  </Dimension>
+  
+
+  <Cube name='每日觀看資料'>
+    <Dimensions>
+      <Dimension source='時間'/>
+      <Dimension source='時段'/>
+      <Dimension source='影片'/>
+      <Dimension source='CDN服務'/>
+      <Dimension source='CDN廠商'/>
+    </Dimensions>
+    <MeasureGroups>
+      <MeasureGroup name='每日流量' table='ANS_CDN_DAILY_REPORT'>
+        <Measures>
+          <Measure name='觀看次數' column='ACCESS_COUNT' aggregator='sum' datatype='Numeric' formatString='#,###' />
+          <Measure name='觀看分鐘數' column='TOTAL_WATCH_TIME' aggregator='sum' datatype='Numeric' formatString='#,###' />
+          <Measure name='觀看時數' column='TOTAL_WATCH_TIME_HOURS' aggregator='sum' datatype='Numeric' formatString='#,###.00' />
+          <Measure name='下載流量MB' column='VOLUME_MB' aggregator='sum' datatype='Numeric' formatString='#,###.00' />
+        </Measures>
+
+        <DimensionLinks>
+          <ForeignKeyLink dimension='CDN廠商' foreignKeyColumn='CDN_PROVIDER' />
+          <ForeignKeyLink dimension='時間' foreignKeyColumn='P_DATE' />
+          <ForeignKeyLink dimension='影片' foreignKeyColumn='PROGRAM_ID' />
+          <ForeignKeyLink dimension='CDN服務' foreignKeyColumn='SERVICE_NAME' />
+          <ReferenceLink dimension='時段' />
+        </DimensionLinks>
+      </MeasureGroup>
+      <MeasureGroup name='時段流量' table='ANS_CDN_HOUR_REPORT'>
+        <Measures>
+          <Measure name='觀看次數' column='ACCESS_COUNT' aggregator='sum' datatype='Numeric' formatString='#,###' />
+          <Measure name='觀看分鐘數' column='TOTAL_WATCH_TIME' aggregator='sum' datatype='Numeric' formatString='#,###' />
+          <Measure name='觀看時數' column='TOTAL_WATCH_TIME_HOURS' aggregator='sum' datatype='Numeric' formatString='#,###.00' />
+          <Measure name='下載流量MB' column='VOLUME_MB' aggregator='sum' datatype='Numeric' formatString='#,###.00' />
+        </Measures>
+
+        <DimensionLinks>
+          <ForeignKeyLink dimension='CDN廠商' foreignKeyColumn='CDN_PROVIDER' />
+          <ForeignKeyLink dimension='時間' foreignKeyColumn='P_DATE' />
+          <ForeignKeyLink dimension='影片' foreignKeyColumn='PROGRAM_ID' />
+          <ForeignKeyLink dimension='CDN服務' foreignKeyColumn='SERVICE_NAME' />
+          <ForeignKeyLink dimension='時段' foreignKeyColumn='P_HOUR'/>
+
+        </DimensionLinks>
+      </MeasureGroup>
+    </MeasureGroups>
+
+    <CalculatedMembers name='每日流量'>
+      <CalculatedMember name='下載流量GB' dimension='Measures'>
+        <Formula>[Measures].[下載流量MB] / 1024 </Formula>
+        <CalculatedMemberProperty name='FORMAT_STRING' value='#,###.00'/>
+      </CalculatedMember>
+      <CalculatedMember name='平均時間' dimension='Measures'
+              formula='[Measures].[觀看分鐘數] / [Measures].[觀看次數]'
+              visible='true' caption='平均時間'>
+        <CalculatedMemberProperty name='FORMAT_STRING' value='#,###.00'/>
+      </CalculatedMember>
+    </CalculatedMembers>
+    
+  </Cube>
+</Schema>
